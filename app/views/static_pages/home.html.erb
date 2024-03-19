@@ -1,7 +1,7 @@
 
 <h1>Search for Articles</h1>
 
-<%= form_with url: articles_path, method: :get, local: true do %>
+<%= form_with url: root_path, method: :get, local: true do %>
   <div class="search-bar">
     <%= text_field_tag :search, params[:search], placeholder: "Enter article title..." %>
 
@@ -41,3 +41,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= paginate @articles %>
