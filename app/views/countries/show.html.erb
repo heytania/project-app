@@ -1,0 +1,24 @@
+<h1><%= @country.name %></h1>
+
+<h2>Articles related to <%= @country.name %>:</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Publisher</th>
+      <th>Published Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= link_to article.author.name, author_path(article.author) %></td>
+        <td><%= article.publisher.name %></td>
+        <td><%= article.published_date.strftime('%B %d, %Y') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,104 @@
+<h1>About Our Application</h1>
+
+<p>
+  This web application provides news articles sourced from various publishers around the world.
+</p>
+
+<h2>Data Sources</h2>
+
+<p>
+  The data presented in this application is sourced from a CSV file provided by <a href="https://newsdata.io">NewsData.io</a>.
+</p>
+
+<h2>Details</h2>
+
+<p>
+  The articles cover a range of categories from business to technology, and they come from various countries and are written in multiple languages. We aim to provide a comprehensive overview of current global news.
+</p>
+
+<h2>Database Information</h2>
+
+<p>
+  Our application uses a structured database to store and manage the news articles and related information. Below is a detailed breakdown of our database structure.
+</p>
+
+<h3>Tables and Their Structures:</h3>
+
+<dl>
+  <dt>Authors</dt>
+  <dd>
+    - id: integer (primary key) <br>
+    - name: string (based on "AUTHOR" in CSV)
+  </dd>
+
+  <dt>Publishers</dt>
+  <dd>
+    - id: integer (primary key) <br>
+    - name: string (based on "PUBLISHER" in CSV)
+  </dd>
+
+  <dt>Articles</dt>
+  <dd>
+    - id: integer (primary key) <br>
+    - title: string (based on "TITLE" in CSV) <br>
+    - link: string (based on "ARTICLE LINK" in CSV) <br>
+    - published_date: datetime (based on "PUBLISHED DATE (UTC)" in CSV) <br>
+    - description: text (based on "DESCRIPTION" in CSV) <br>
+    - image_url: string (based on "IMAGE URL" in CSV) <br>
+    - video_url: string (based on "VIDEO URL" in CSV) <br>
+    - language: string (based on "LANGUAGE" in CSV) <br>
+    - author_id: integer (foreign key to "Authors" table) <br>
+    - publisher_id: integer (foreign key to "Publishers" table)
+  </dd>
+
+  <dt>Categories</dt>
+  <dd>
+    - id: integer (primary key) <br>
+    - name: string (based on "CATEGORY" in CSV)
+  </dd>
+
+  <dt>Countries</dt>
+  <dd>
+    - id: integer (primary key) <br>
+    - name: string (based on "COUNTRY" in CSV)
+  </dd>
+
+  <dt>Article_Categories</dt>
+  <dd>
+    - article_id: integer (foreign key to "Articles" table) <br>
+    - category_id: integer (foreign key to "Categories" table)
+  </dd>
+
+  <dt>Article_Countries</dt>
+  <dd>
+    - article_id: integer (foreign key to "Articles" table) <br>
+    - country_id: integer (foreign key to "Countries" table)
+  </dd>
+</dl>
+
+<h3>Associations:</h3>
+
+<p>
+  <strong>Author</strong> has many <strong>Articles</strong>.<br>
+  <strong>Publisher</strong> has many <strong>Articles</strong>.<br>
+  <strong>Article</strong> belongs to <strong>Author</strong> and <strong>Publisher</strong>.<br>
+  <strong>Article</strong> has and belongs to many <strong>Categories</strong> (through Article_Categories).<br>
+  <strong>Article</strong> has and belongs to many <strong>Countries</strong> (through Article_Countries).<br>
+  <strong>Category</strong> has and belongs to many <strong>Articles</strong> (through Article_Categories).<br>
+  <strong>Country</strong> has and belongs to many <strong>Articles</strong> (through Article_Countries).
+</p>
+
+<h3>Description:</h3>
+
+<p>
+  An <strong>Author</strong> can write many <strong>Articles</strong>, hence the one-to-many association.<br>
+  A <strong>Publisher</strong> can publish many <strong>Articles</strong>, thus another one-to-many association.<br>
+  An <strong>Article</strong> can belong to many <strong>Categories</strong> (e.g., Business, Top, etc.), thus resulting in a many-to-many association. This relationship is broken down using the join table <strong>Article_Categories</strong>.<br>
+  Similarly, an <strong>Article</strong> can be related to many <strong>Countries</strong>, leading to another many-to-many association. This relationship is broken down using the join table <strong>Article_Countries</strong>.
+</p>
+
+<h2>Contact</h2>
+
+<p>
+  For any inquiries or feedback, please contact our team at [mcastrocortes@Academic.RRC.ca].
+</p>
