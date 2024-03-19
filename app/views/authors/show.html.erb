@@ -1,5 +1,8 @@
-<h1><%= @author.name %></h1>
+<h1><%= @article.title %></h1>
 
-<p>
-  <strong>ID:</strong> <%= @author.id %>
-</p>
+<p><strong>Author:</strong> <%= @article.author.name %></p>
+<p><strong>Publisher:</strong> <%= @article.publisher.name %></p>
+<p><strong>Published Date:</strong> <%= @article.published_date.strftime("%Y-%m-%d") %></p>
+<p><strong>Description:</strong> <%= @article.description %></p>
+<p><strong>Categories:</strong> <%= @article.categories.pluck(:name).join(", ") %></p>
+<p><strong>Countries:</strong> <%= @article.countries.pluck(:name).join(", ") %></p>
