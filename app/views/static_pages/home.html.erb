@@ -1,45 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Search for Articles</h1>
 
-<h1>Search for Articles</h1>
+      <%= form_with url: root_path, method: :get, local: true do %>
+        <div class="search-bar">
+          <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Enter article title..." %>
 
-<%= form_with url: root_path, method: :get, local: true do %>
-  <div class="search-bar">
-    <%= text_field_tag :search, params[:search], placeholder: "Enter article title..." %>
+          <%= select_tag :category_id, options_from_collection_for_select(@categories, "id", "name", params[:category_id]), include_blank: "Select Category", class: "form-select" %>
 
-    <%= select_tag :category_id, options_from_collection_for_select(@categories, "id", "name", params[:category_id]), include_blank: "Select Category" %>
+          <%= submit_tag "Search", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
 
-    <%= submit_tag "Search", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="col-md-6">
+      <% if @articles.any? %>
+        <h1>All Articles</h1>
 
-<h1>All Articles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Publisher</th>
-      <th>Published Date</th>
-      <th>Countries</th>
-    </tr>
-  </thead>
-  <tbody id="articles-results">
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.title %></td>
-        <td><%= link_to article.author.name, author_path(article.author) %></td>
-        <td><%= article.publisher.name %></td>
-        <td><%= article.published_date.strftime('%B %d, %Y') %></td>
-        <td>
-          <ul>
-            <% article.countries.each do |country| %>
-              <li><%= link_to country.name, country_path(country) %></li>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Publisher</th>
+              <th>Published Date</th>
+              <th>Countries</th>
+            </tr>
+          </thead>
+          <tbody id="articles-results">
+            <% @articles.each do |article| %>
+              <tr>
+                <td><%= article.title %></td>
+                <td><%= link_to article.author.name, author_path(article.author) %></td>
+                <td><%= article.publisher.name %></td>
+                <td><%= article.published_date.strftime('%B %d, %Y') %></td>
+                <td>
+                  <ul>
+                    <% article.countries.each do |country| %>
+                      <li><%= link_to country.name, country_path(country) %></li>
+                    <% end %>
+                  </ul>
+                </td>
+              </tr>
             <% end %>
-          </ul>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          </tbody>
+        </table>
 
-<%= paginate @articles %>
+        <%= paginate @articles %>
+      <% else %>
+        <p>No articles found.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

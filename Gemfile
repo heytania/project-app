@@ -55,6 +55,9 @@ gem 'sassc'
 # Pagination gem
 gem 'kaminari'
 
+# Bootstrap CSS framework
+gem 'bootstrap-sass'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
